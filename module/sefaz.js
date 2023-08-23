@@ -45,18 +45,19 @@ class SefazCom {
         return this.nfe.end({ pretty: true });
     }
 
-    calcularDV(chaveAcesso) {
-        const peso = [2, 3, 4, 5, 6, 7, 8, 9];
-        let soma = 0;
-      
-        for (let i = chaveAcesso.length - 1; i >= 0; i--) {
-          const digito = parseInt(chaveAcesso.charAt(i), 10);
-          soma += digito * peso[i % 8];
-        }
-      
-        const resto = soma % 11;
-        return resto < 2 ? 0 : 11 - resto;
-      }
+    gerarChave(_uf,_cnpj,_mod,_serie,_nNF,_tpEmis){
+        const ufs = {"AC":12,"AL":27,"AM":13,"AP":16,"BA":29,"CE":23,"DF":53,"ES":32,"GO":52,"MA":21,"MG":31,"MS":50,"MT":51,"PA":15,"PB":25,"PE":26,"PI":22,"PR":41,"RJ":33,"RN":24,"RO":11,"RR":14,"RS":43,"SC":42,"SE":28,"SP":35,"TO":17};
+        this.cUF = ufs[_uf];
+        this.cnpj = _cnpj;
+        this.mod = _mod;
+        this.serie = _serie;
+        this.nNF = _nNF;
+        this.tpEmis = _tpEmis;
+        this.cNF = Math.floor(Math.random() * Math.pow(10, 8)).toString().padStart(8, '0');
+
+
+        this.cDV = '';
+    }
 }
 
 module.exports = SefazCom
